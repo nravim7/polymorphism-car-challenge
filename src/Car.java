@@ -65,53 +65,51 @@ class ElectricCar extends Car{
 
     public ElectricCar(String description) {
         super(description);
-        this.avgKmPerCharge = 80.5;
-        this.batterySize = 20;
+    }
+
+    public ElectricCar(String description, double avgKmPerCharge, int batterySize) {
+        super(description);
+        this.avgKmPerCharge = avgKmPerCharge;
+        this.batterySize = batterySize;
     }
 
     @Override
     public void startEngine() {
-        super.startEngine();
-        System.out.println("Electric car battery is on and its battery size is " + batterySize);
+        System.out.printf("BEV -> switch %d kWh battery on, Ready!%n", batterySize);
     }
 
     @Override
-    public void drive() {
-        super.drive();
-        System.out.println("Driving the Electric car and it can be drive " + avgKmPerCharge + " per Charge");
+    protected void runEngine() {
+        System.out.printf("BEV -> usage under the average: %.2f %n", avgKmPerCharge);
     }
 
-    public void electricMotor() {
-        System.out.println("Electric motor is starting");
-    }
 }
 
-class HybridCar extends Car {
+class HybridCar extends Car{
     private double avgKmPerLitre;
-    private int batterySize;
     private int cylinders;
+    private int batterySize;
 
     public HybridCar(String description) {
         super(description);
-        this.avgKmPerLitre = 40;
-        this.batterySize = 20;
-        this.cylinders = 4;
+    }
+
+    public HybridCar(String description, double avgKmPerLitre, int cylinders, int batterySize) {
+        super(description);
+        this.avgKmPerLitre = avgKmPerLitre;
+        this.cylinders = cylinders;
+        this.batterySize = batterySize;
     }
 
     @Override
     public void startEngine() {
-        super.startEngine();
-        System.out.println("Hybrid car engine is starting and its battery size is " + batterySize +
-                " and it has " + cylinders + " cylinders");
+        System.out.printf("Hybrid -> %d cylinders are fired up.%n", cylinders);
+        System.out.printf("Hybrid -> switch %d kWh battery on, Ready!%n", batterySize);
     }
 
     @Override
-    public void drive() {
-        super.drive();
-        System.out.println("Driving the Hybrid car and it can be drive " + avgKmPerLitre + " per litre");
+    protected void runEngine() {
+        System.out.printf("Hybrid -> usage below the average: %.2f %n", avgKmPerLitre);
     }
 
-    public void hybridMotor() {
-        System.out.println("Hybrid motor is starting");
-    }
 }
